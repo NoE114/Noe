@@ -15,6 +15,13 @@
     <link href="https://fonts.cdnfonts.com/css/monument-extended" rel="stylesheet" />
   </head>
   <body class="bg-[#050605] text-[#D7D9D2] overflow-x-hidden selection:bg-[#9CFF4A] selection:text-[#050605]">
+    <!-- Netlify Forms static pre-render target for Vite SPA discovery -->
+    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

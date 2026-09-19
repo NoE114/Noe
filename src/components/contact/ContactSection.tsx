@@ -16,9 +16,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   staggerDelay = 0,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [subject, setSubject] = useState<string>('');
   const [message, setMessage] = useState<string>('');
-  const [isSent, setIsSent] = useState<boolean>(false);
+  const [botField, setBotField] = useState<string>('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [animationDone, setAnimationDone] = useState<boolean>(false);
 
   const handleCopyEmail = () => {
@@ -41,15 +44,49 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     onHoverTarget(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!message) return;
+    if (!message || !email) return;
+
+    setStatus('sending');
+
+    try {
+      const formData = new URLSearchParams();
+      formData.append('form-name', 'contact');
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject || 'Systems / Security Opportunity');
+      formData.append('message', message);
+      if (botField) {
+        formData.append('bot-field', botField);
+      }
+
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString(),
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setName('');
+        setEmail('');
+        setSubject('');
+        setMessage('');
+        setTimeout(() => setStatus('idle'), 7000);
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  };
+
+  const handleMailtoFallback = () => {
     const mailtoUrl = `mailto:${DEVELOPER_PROFILE.email}?subject=${encodeURIComponent(
       subject || 'Systems / Security Opportunity'
-    )}&body=${encodeURIComponent(message)}`;
+    )}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
     window.location.href = mailtoUrl;
-    setIsSent(true);
-    setTimeout(() => setIsSent(false), 4000);
   };
 
   return (
@@ -182,30 +219,75 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           className="lg:col-span-6"
         >
           <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             onMouseEnter={(e) => handleMouseEnter(e, 'contact-form')}
             onMouseLeave={handleMouseLeave}
             className="p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono text-xs space-y-4 hover:border-[#9CFF4A]/40 transition-colors"
           >
+            {/* Netlify Form Hidden Inputs */}
+            <input type="hidden" name="form-name" value="contact" />
+            <p className="hidden" aria-hidden="true">
+              <label>
+                Bot shield: <input name="bot-field" value={botField} onChange={(e) => setBotField(e.target.value)} />
+              </label>
+            </p>
+
             <div className="text-xs text-[#9CFF4A] font-bold tracking-widest uppercase mb-2 flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Send className="w-3.5 h-3.5" />
                 <span>DISPATCH_MESSAGE</span>
               </div>
               <span className="font-kanji text-[10px] text-[#9CFF4A]/70 font-normal">
-                【 通信送信機 】
+                【 直接通信 // NETLIFY送信 】
               </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <label className="text-[10px] text-[#D7D9D2]/50 tracking-wider">
+                  NAME // CALLSIGN
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="e.g. Alex Vance"
+                  className="w-full p-3 bg-black/40 border border-[#9CFF4A]/20 text-[#D7D9D2] placeholder:text-[#D7D9D2]/30 focus:border-[#9CFF4A] focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-[10px] text-[#D7D9D2]/50 tracking-wider">
+                  EMAIL // RETURN ADDRESS
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="alex@domain.tld"
+                  className="w-full p-3 bg-black/40 border border-[#9CFF4A]/20 text-[#D7D9D2] placeholder:text-[#D7D9D2]/30 focus:border-[#9CFF4A] focus:outline-none"
+                  required
+                />
+              </div>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-[10px] text-[#D7D9D2]/50 tracking-wider">
-                SUBJECT // REPOSITORY OR INQUIRY
+                SUBJECT // TOPIC OR REPO
               </label>
               <input
                 type="text"
+                name="subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                placeholder="e.g. git-janitor contribution / systems role"
+                placeholder="e.g. git-janitor / systems audit / inquiry"
                 className="w-full p-3 bg-black/40 border border-[#9CFF4A]/20 text-[#D7D9D2] placeholder:text-[#D7D9D2]/30 focus:border-[#9CFF4A] focus:outline-none"
               />
             </div>
@@ -215,6 +297,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 MESSAGE PAYLOAD
               </label>
               <textarea
+                name="message"
                 rows={5}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -226,15 +309,41 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             <button
               type="submit"
-              className="w-full flex items-center justify-center space-x-2 py-3 bg-[#9CFF4A] text-[#050605] font-bold tracking-wider hover:bg-[#D7D9D2] transition-colors cursor-pointer"
+              disabled={status === 'sending'}
+              className="w-full flex items-center justify-center space-x-2 py-3 bg-[#9CFF4A] text-[#050605] font-bold tracking-wider hover:bg-[#D7D9D2] disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
-              <span>TRANSMIT VIA MAIL CLIENT</span>
+              <span>
+                {status === 'sending'
+                  ? 'TRANSMITTING_PACKET...'
+                  : 'DISPATCH DIRECT TO INBOX'}
+              </span>
             </button>
 
-            {isSent && (
-              <div className="p-3 bg-[#9CFF4A]/10 border border-[#9CFF4A] text-[#9CFF4A] text-center text-xs">
-                Draft client opened successfully.
+            {status === 'success' && (
+              <div className="p-3 bg-[#9CFF4A]/10 border border-[#9CFF4A] text-[#9CFF4A] space-y-1">
+                <div className="font-bold flex items-center space-x-2">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>TRANSMISSION_ACKNOWLEDGED</span>
+                </div>
+                <p className="text-[11px] text-[#D7D9D2]/80">
+                  Message securely stored in Netlify dashboard &amp; dispatched to recipient.
+                </p>
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div className="p-3 bg-red-950/40 border border-red-500/50 text-red-200 space-y-2">
+                <p className="text-[11px]">
+                  Direct transmission unavailable in current preview environment.
+                </p>
+                <button
+                  type="button"
+                  onClick={handleMailtoFallback}
+                  className="px-3 py-1.5 bg-[#9CFF4A] text-[#050605] font-bold text-[10px] tracking-wider hover:bg-[#D7D9D2] transition-colors"
+                >
+                  OPEN DEFAULT MAIL CLIENT
+                </button>
               </div>
             )}
           </form>
