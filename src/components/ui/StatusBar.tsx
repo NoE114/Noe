@@ -32,7 +32,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="fixed top-0 left-0 right-0 z-40 bg-[#050605]/85 backdrop-blur-md border-b border-[#9CFF4A]/10 px-4 sm:px-8 py-3 transition-colors"
       >
-        <div className="max-w-7xl xl:max-w-[85rem] 2xl:max-w-[100rem] mx-auto flex items-center justify-between font-mono text-xs text-[#D7D9D2]">
+        <div className="max-w-7xl 2xl:max-w-[92rem] mx-auto flex items-center justify-between font-mono text-xs text-[#D7D9D2]">
           {/* Identity */}
           <div className="flex items-center space-x-3">
             <button
@@ -131,7 +131,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className="fixed bottom-0 left-0 right-0 z-40 bg-[#050605]/85 backdrop-blur-sm border-t border-[#9CFF4A]/10 px-4 sm:px-8 py-2 font-mono text-[10px] text-[#D7D9D2]/50"
       >
-        <div className="max-w-7xl xl:max-w-[85rem] 2xl:max-w-[100rem] mx-auto flex items-center justify-between">
+        <div className="max-w-7xl 2xl:max-w-[92rem] mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <span className="flex items-center space-x-1.5 text-[#9CFF4A]">
               <span className="w-1.5 h-1.5 bg-[#9CFF4A] inline-block animate-pulse" />

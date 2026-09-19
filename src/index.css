@@ -36,56 +36,110 @@
 }
 
 /* ---------------------------------------------------------------------------
- * Fluid / viewport-adaptive scale.
- * Browser zoom changes the CSS-px viewport width, which used to snap sizes
- * between breakpoints (sm/md/lg) and left dead space. These clamp() helpers
- * scale continuously with the viewport so the layout stays proportional at
- * every zoom level instead of growing/shrinking in steps.
+ * Stable Typography and Spacing System.
+ * Clean, rock-solid rem-based scales that respond harmoniously to browser
+ * zoom and resolutions without erratic vw jumps.
  * ------------------------------------------------------------------------- */
 @layer utilities {
   /* Flagship display headline (hero: LOW-LEVEL SYSTEMS / SECURITY.) */
   .fluid-display {
-    font-size: clamp(2.5rem, 5vw + 0.75rem, 7.75rem);
+    font-size: 3rem;
     line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  @media (min-width: 640px) {
+    .fluid-display {
+      font-size: 3.85rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .fluid-display {
+      font-size: 4.5rem;
+    }
   }
 
-  /* Split project titles (text-4xl -> text-7xl stepped range) */
+  /* Split project titles */
   .fluid-split {
-    font-size: clamp(1.9rem, 3.6vw + 0.75rem, 6rem);
+    font-size: 2.25rem;
+    line-height: 1.02;
+  }
+  @media (min-width: 640px) {
+    .fluid-split {
+      font-size: 3.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .fluid-split {
+      font-size: 3.75rem;
+    }
   }
 
-  /* Oversized kanji/watermark glyphs (text-8xl / text-9xl) */
+  /* Oversized kanji/watermark glyphs */
   .fluid-kanji {
-    font-size: clamp(4rem, 8vw + 1rem, 10.5rem);
+    font-size: 5rem;
+  }
+  @media (min-width: 1024px) {
+    .fluid-kanji {
+      font-size: 6.5rem;
+    }
   }
 
   .fluid-kanji-sm {
-    font-size: clamp(3rem, 5.5vw + 0.75rem, 6.5rem);
+    font-size: 3.5rem;
+  }
+  @media (min-width: 1024px) {
+    .fluid-kanji-sm {
+      font-size: 4.5rem;
+    }
   }
 
-  /* Section-level headings (text-3xl -> text-4xl stepped range) */
+  /* Section-level headings */
   .fluid-heading {
-    font-size: clamp(1.8rem, 2.6vw + 0.9rem, 3.5rem);
+    font-size: 1.75rem;
+  }
+  @media (min-width: 640px) {
+    .fluid-heading {
+      font-size: 2.25rem;
+    }
   }
 
-  /* Section vertical+horizontal rhythm (py-24 px-6 sm:px-12 lg:px-20) */
+  /* Section vertical+horizontal rhythm */
   .section-pad {
-    padding: clamp(4rem, 7vw, 8.5rem) clamp(1.25rem, 4vw, 5rem);
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: 640px) {
+    .section-pad {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section-pad {
+      padding-top: 6.5rem;
+      padding-bottom: 6.5rem;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
   }
 
-  /* Card gutters that currently use fixed p-8 / p-6 sm:p-10 */
+  /* Card gutters */
   .card-pad {
-    padding: clamp(1.25rem, 2.4vw, 2.5rem);
+    padding: 1.5rem;
   }
 
   .card-pad-lg {
-    padding: clamp(1.5rem, 3.2vw, 3rem);
+    padding: 2rem;
   }
 }
 
-/* Technical grid cell: scales with the viewport instead of a fixed 120px */
+/* Technical grid cell: stable 100px cell size for razor-sharp coordinate aesthetics */
 :root {
-  --tech-cell: clamp(70px, 9vw, 170px);
+  --tech-cell: 100px;
 }
 
 .writing-vertical-rl {

@@ -13,7 +13,7 @@ export const TechnicalGrid: React.FC<TechnicalGridProps> = ({ surgeActive = fals
       style={
         {
           opacity: isLoaded ? 1 : surgeActive ? 0.9 : 0.4,
-          '--tech-cell': 'clamp(70px, 9vw, 170px)',
+          '--tech-cell': '100px',
         } as React.CSSProperties
       }
       aria-hidden="true"

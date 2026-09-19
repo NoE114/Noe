@@ -89,6 +89,56 @@ export default function App() {
     };
   }, []);
 
+  // Stabilize text and components against browser zoom in/out and resolution changes
+  useEffect(() => {
+    // Record initial devicePixelRatio on load as the user's baseline
+    const baseDpr = window.devicePixelRatio || 1;
+
+    const stabilizeZoom = () => {
+      // Keep standard scale on mobile
+      if (window.innerWidth < 768) {
+        document.documentElement.style.fontSize = '';
+        return;
+      }
+
+      const currentDpr = window.devicePixelRatio || 1;
+      const zoomRatio = currentDpr / baseDpr;
+
+      // Inversely scale root font size:
+      // When zoomed in (e.g. 150%), zoomRatio is 1.5 -> root font size becomes 16 / 1.5 = 10.67px.
+      // 10.67px * 1.5 zoom = 16px visual size on the user's screen (doesn't blow up!).
+      // When zoomed out (e.g. 50%), zoomRatio is 0.5 -> root font size becomes 16 / 0.5 = 32px.
+      // 32px * 0.5 zoom = 16px visual size on the user's screen (doesn't shrink!).
+      const targetSize = 16 / zoomRatio;
+      const clampedSize = Math.max(9, Math.min(targetSize, 40));
+      document.documentElement.style.fontSize = `${clampedSize}px`;
+    };
+
+    stabilizeZoom();
+
+    window.addEventListener('resize', stabilizeZoom);
+
+    let mq: MediaQueryList | null = null;
+    let mqListener: (() => void) | null = null;
+    try {
+      mq = window.matchMedia(`(resolution: ${window.devicePixelRatio}dppx)`);
+      mqListener = () => {
+        stabilizeZoom();
+      };
+      mq.addEventListener('change', mqListener);
+    } catch {
+      // Media query resolution listener fallback
+    }
+
+    return () => {
+      window.removeEventListener('resize', stabilizeZoom);
+      if (mq && mqListener) {
+        mq.removeEventListener('change', mqListener);
+      }
+      document.documentElement.style.fontSize = '';
+    };
+  }, []);
+
   const handleExecuteCommand = (cmd: string, output: string) => {
     setTerminalInitialCmd(cmd);
     setTerminalInitialOut(output);

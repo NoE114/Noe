@@ -103,9 +103,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         if (entranceTrigger) setAnimationDone(true);
       }}
       style={animationDone ? { transform: 'none' } : undefined}
-      className="relative z-20 section-pad border-t border-[#9CFF4A]/10 pb-[clamp(7rem,13vw,11rem)]"
+      className="relative z-20 section-pad border-t border-[#9CFF4A]/10 pb-24 sm:pb-32"
     >
-      {/* Section Header */}
+      <div className="w-full max-w-7xl 2xl:max-w-[92rem] mx-auto">
+        {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: -16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -348,6 +349,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             )}
           </form>
         </motion.div>
+      </div>
       </div>
     </motion.section>
   );

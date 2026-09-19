@@ -47,7 +47,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
       style={animationDone ? { transform: 'none' } : undefined}
       className="relative z-20 section-pad border-t border-[#9CFF4A]/10"
     >
-      <div className="w-full max-w-7xl xl:max-w-[85rem] 2xl:max-w-[100rem] mx-auto">
+      <div className="w-full max-w-7xl 2xl:max-w-[92rem] mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: -16 }}
