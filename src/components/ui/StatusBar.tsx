@@ -51,38 +51,42 @@ export const StatusBar: React.FC<StatusBarProps> = ({
           </div>
 
           {/* Quick Nav Anchors */}
-          <nav className="hidden lg:flex items-center space-x-8 text-[11px] tracking-wider text-[#D7D9D2]/60">
+          <nav className="hidden lg:flex items-center space-x-7 text-[11px] tracking-wider text-[#D7D9D2]/60">
             <button
               onClick={() => scrollTo('hero')}
-              className={`hover:text-[#9CFF4A] transition-colors ${
+              className={`hover:text-[#9CFF4A] transition-colors flex items-center space-x-1.5 ${
                 activeSection === 'hero' ? 'text-[#9CFF4A] font-semibold' : ''
               }`}
             >
-              01 / HERO
+              <span>01 / HERO</span>
+              <span className="font-kanji text-[10px] text-[#9CFF4A]/70">【 始動 】</span>
             </button>
             <button
               onClick={() => scrollTo('projects')}
-              className={`hover:text-[#9CFF4A] transition-colors ${
+              className={`hover:text-[#9CFF4A] transition-colors flex items-center space-x-1.5 ${
                 activeSection === 'projects' ? 'text-[#9CFF4A] font-semibold' : ''
               }`}
             >
-              02 / SELECTED REPOS
+              <span>02 / SELECTED REPOS</span>
+              <span className="font-kanji text-[10px] text-[#9CFF4A]/70">【 目録 】</span>
             </button>
             <button
               onClick={() => scrollTo('about')}
-              className={`hover:text-[#9CFF4A] transition-colors ${
+              className={`hover:text-[#9CFF4A] transition-colors flex items-center space-x-1.5 ${
                 activeSection === 'about' ? 'text-[#9CFF4A] font-semibold' : ''
               }`}
             >
-              03 / ENVIRONMENT
+              <span>03 / ENVIRONMENT</span>
+              <span className="font-kanji text-[10px] text-[#9CFF4A]/70">【 環境 】</span>
             </button>
             <button
               onClick={() => scrollTo('contact')}
-              className={`hover:text-[#9CFF4A] transition-colors ${
+              className={`hover:text-[#9CFF4A] transition-colors flex items-center space-x-1.5 ${
                 activeSection === 'contact' ? 'text-[#9CFF4A] font-semibold' : ''
               }`}
             >
-              04 / CONTACT
+              <span>04 / CONTACT</span>
+              <span className="font-kanji text-[10px] text-[#9CFF4A]/70">【 通信 】</span>
             </button>
           </nav>
 
@@ -129,13 +133,19 @@ export const StatusBar: React.FC<StatusBarProps> = ({
       >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <span className="flex items-center space-x-1 text-[#9CFF4A]">
+            <span className="flex items-center space-x-1.5 text-[#9CFF4A]">
               <span className="w-1.5 h-1.5 bg-[#9CFF4A] inline-block animate-pulse" />
               <span>ONLINE</span>
+              <span className="font-kanji text-[9px] text-[#9CFF4A]/80 font-normal">
+                【 状態: 正常 】
+              </span>
             </span>
             <span className="hidden sm:inline">OS: ARCH LINUX (X86_64)</span>
             <span className="hidden md:inline">EDITOR: NEOVIM</span>
-            <span className="hidden lg:inline">PHILOSOPHY: ZERO_DEPENDENCY</span>
+            <span className="hidden lg:inline">
+              PHILOSOPHY: ZERO_DEPENDENCY
+              <span className="font-kanji text-[9px] text-[#9CFF4A]/70 ml-1">【 零依存 】</span>
+            </span>
           </div>
 
           <div className="flex items-center space-x-4">

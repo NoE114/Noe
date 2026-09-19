@@ -71,6 +71,9 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
           <span className="text-[#9CFF4A] font-bold text-sm">02 / 06</span>
           <span className="text-[#9CFF4A]/40">/</span>
           <span className="text-[#9CFF4A] tracking-wider uppercase">SELECTED REPOSITORIES &amp; SYSTEMS</span>
+          <span className="font-kanji text-[11px] text-[#9CFF4A]/70 hidden md:inline tracking-wider">
+            【 開発記録 // 独立設計体系 】
+          </span>
         </div>
         <div className="hidden sm:block text-[#D7D9D2]/50 tracking-wider">
           PINNED INDEX // DYNAMIC SPLIT TYPOGRAPHY
@@ -87,9 +90,12 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-4 lg:sticky lg:top-28 space-y-4"
         >
-          <div className="font-mono text-xs tracking-widest text-[#9CFF4A] uppercase mb-4 flex items-center space-x-2">
-            <span className="w-1.5 h-1.5 bg-[#9CFF4A] animate-pulse" />
-            <span>PROJECT_INDEX</span>
+          <div className="font-mono text-xs tracking-widest text-[#9CFF4A] uppercase mb-4 flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <span className="w-1.5 h-1.5 bg-[#9CFF4A] animate-pulse" />
+              <span>PROJECT_INDEX</span>
+            </div>
+            <span className="font-kanji text-[11px] text-[#9CFF4A]/70">【 目録 】</span>
           </div>
 
           <div className="space-y-2">
@@ -125,9 +131,16 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                     >
                       {proj.index}
                     </span>
-                    <span className="text-[10px] text-[#9CFF4A]/70 uppercase tracking-wider">
-                      {proj.techStack[0]}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      {proj.kanjiBadge && (
+                        <span className="font-kanji text-[10px] text-[#9CFF4A]/70 px-1 py-0.5 border border-[#9CFF4A]/20 bg-[#9CFF4A]/5">
+                          {proj.kanjiBadge}
+                        </span>
+                      )}
+                      <span className="text-[10px] text-[#9CFF4A]/70 uppercase tracking-wider">
+                        {proj.techStack[0]}
+                      </span>
+                    </div>
                   </div>
 
                   <div className="font-display font-bold text-lg sm:text-xl tracking-tight text-[#D7D9D2] group-hover:text-[#9CFF4A] transition-colors">
@@ -186,7 +199,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 className="relative border border-[#9CFF4A]/20 bg-[#050605]/90 p-6 sm:p-10 overflow-hidden"
               >
-                {/* Background watermarked project index */}
+                {/* Background watermarked project index & Japanese Kanji */}
                 <div
                   className="absolute -right-6 -bottom-10 font-display font-black text-8xl sm:text-9xl text-[#9CFF4A]/5 select-none pointer-events-none"
                   aria-hidden="true"
@@ -194,9 +207,23 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                   {activeProject.index}
                 </div>
 
-                <div className="font-mono text-xs text-[#9CFF4A] tracking-widest uppercase mb-4 flex items-center space-x-2">
+                {activeProject.kanjiWatermark && (
+                  <div
+                    className="absolute right-12 top-2 font-kanji font-black text-7xl sm:text-8xl md:text-9xl text-[#9CFF4A]/[0.035] select-none pointer-events-none"
+                    aria-hidden="true"
+                  >
+                    {activeProject.kanjiWatermark}
+                  </div>
+                )}
+
+                <div className="font-mono text-xs text-[#9CFF4A] tracking-widest uppercase mb-4 flex flex-wrap items-center gap-2">
                   <span className="w-2 h-2 bg-[#9CFF4A]" />
                   <span>{activeProject.tag}</span>
+                  {activeProject.kanjiCategory && (
+                    <span className="font-kanji text-[10px] text-[#9CFF4A]/80 border border-[#9CFF4A]/30 px-1.5 py-0.5 bg-[#9CFF4A]/5">
+                      【 {activeProject.kanjiCategory} 】
+                    </span>
+                  )}
                 </div>
 
                 {/* THE WORD SPLIT SYSTEM (KERN / EL style) */}
@@ -294,9 +321,14 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                   transition={{ duration: 0.5, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
                   className="p-6 border border-[#9CFF4A]/15 bg-[#050605]/70 space-y-3"
                 >
-                  <div className="text-[#9CFF4A] font-bold tracking-wider flex items-center space-x-2">
-                    <Cpu className="w-3.5 h-3.5" />
-                    <span>ARCHITECTURE HIGHLIGHTS</span>
+                  <div className="text-[#9CFF4A] font-bold tracking-wider flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Cpu className="w-3.5 h-3.5" />
+                      <span>ARCHITECTURE HIGHLIGHTS</span>
+                    </div>
+                    <span className="font-kanji text-[10px] text-[#9CFF4A]/70 font-normal">
+                      【 構造設計 】
+                    </span>
                   </div>
                   <ul className="space-y-2 text-[#D7D9D2]/75">
                     {activeProject.architectureHighlights.map((item, i) => (
@@ -316,9 +348,14 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                   transition={{ duration: 0.5, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
                   className="p-6 border border-[#9CFF4A]/15 bg-[#050605]/70 space-y-3"
                 >
-                  <div className="text-[#9CFF4A] font-bold tracking-wider flex items-center space-x-2">
-                    <Shield className="w-3.5 h-3.5" />
-                    <span>DESIGN CONSTRAINTS</span>
+                  <div className="text-[#9CFF4A] font-bold tracking-wider flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <Shield className="w-3.5 h-3.5" />
+                      <span>DESIGN CONSTRAINTS</span>
+                    </div>
+                    <span className="font-kanji text-[10px] text-[#9CFF4A]/70 font-normal">
+                      【 制約条件 】
+                    </span>
                   </div>
                   <ul className="space-y-2 text-[#D7D9D2]/75">
                     {activeProject.designConstraints.map((item, i) => (
@@ -343,6 +380,9 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                   <div className="flex items-center space-x-2 font-bold">
                     <Terminal className="w-4 h-4" />
                     <span>VERIFIED CLI COMMAND INTERFACE</span>
+                    <span className="font-kanji text-[10px] text-[#9CFF4A]/70 font-normal hidden sm:inline">
+                      【 実機検証 】
+                    </span>
                   </div>
                   <span className="text-[10px] text-[#D7D9D2]/40">
                     CLICK TO EXECUTE IN LIVE SANDBOX

@@ -6,6 +6,9 @@ export interface Project {
   splitFirst: string; // e.g., "GIT" or "KERN"
   splitSecond: string; // e.g., "JANITOR" or "EL"
   category: string; // "LOW-LEVEL SYSTEMS & CLI", "ALGORITHMS & METRICS", etc.
+  kanjiBadge?: string; // e.g. "【 掃討・零依存 】"
+  kanjiWatermark?: string; // e.g. "掃討"
+  kanjiCategory?: string; // e.g. "直接解析・機密探知"
   repoUrl: string;
   techStack: string[];
   summary: string;

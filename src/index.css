@@ -31,6 +31,15 @@
   font-family: 'JetBrains Mono', monospace;
 }
 
+.font-kanji {
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+}
+
+.writing-vertical-rl {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
 /* Scanlines overlay */
 .scanlines {
   background: linear-gradient(

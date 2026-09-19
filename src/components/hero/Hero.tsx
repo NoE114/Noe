@@ -42,6 +42,9 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
           <span className="text-[#9CFF4A] font-bold text-sm">01 / 06</span>
           <span className="text-[#9CFF4A]/40">/</span>
           <span className="tracking-widest uppercase text-[#9CFF4A]">SYS_ARCH_INIT</span>
+          <span className="font-kanji text-[11px] text-[#9CFF4A]/70 hidden sm:inline tracking-wider">
+            【 始動 // 零壱 】
+          </span>
         </div>
 
         {/* Minimal statement side quote */}
@@ -54,23 +57,43 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
             I BUILD<br />AT THE<br />LOWEST<br />LEVEL.
           </p>
           <div className="w-12 h-[1px] bg-[#9CFF4A]/50 my-2 ml-auto" />
-          <p className="text-[10px] text-[#9CFF4A] tracking-wider font-mono">
+          <p className="font-kanji text-[11px] text-[#9CFF4A] tracking-widest font-medium mb-1">
+            「 最深層の構築 」
+          </p>
+          <p className="text-[10px] text-[#D7D9D2]/60 tracking-wider font-mono">
             systems • security • infrastructure • reverse engineering
           </p>
         </div>
       </motion.div>
 
+      {/* Aesthetic Vertical Japanese Kanji Watermark Column */}
+      <div className="absolute right-4 sm:right-10 top-1/4 -translate-y-12 pointer-events-none select-none z-0 hidden md:flex flex-col items-center opacity-[0.035] hover:opacity-[0.08] transition-opacity duration-700">
+        <span className="font-kanji text-8xl lg:text-9xl font-black text-[#9CFF4A] writing-vertical-rl tracking-[0.2em]">
+          深層工学
+        </span>
+      </div>
+
+      <div className="absolute left-3 bottom-24 pointer-events-none select-none z-0 hidden xl:flex flex-col items-center opacity-[0.03]">
+        <span className="font-kanji text-7xl font-black text-[#D7D9D2] writing-vertical-rl tracking-[0.25em]">
+          零外部依存
+        </span>
+      </div>
+
       {/* Main Off-Grid Asymmetric Headline Statement */}
-      <div className="my-auto py-12">
+      <div className="my-auto py-12 relative z-10">
         <div className="max-w-5xl">
           {/* Section Marker */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.8 }}
             transition={{ duration: 0.5, delay: 0.15 }}
-            className="font-mono text-sm sm:text-base text-[#9CFF4A]/80 tracking-widest mb-3"
+            className="flex items-center space-x-3 font-mono text-sm sm:text-base text-[#9CFF4A]/80 tracking-widest mb-3"
           >
-            01
+            <span>01</span>
+            <span className="text-[#9CFF4A]/30">/</span>
+            <span className="font-kanji text-xs text-[#9CFF4A]/60 tracking-widest">
+              【 核心領域 】
+            </span>
           </motion.div>
 
           <motion.div
@@ -81,9 +104,14 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
             onMouseLeave={handleMouseLeave}
             className="group cursor-default"
           >
-            <p className="font-mono text-sm sm:text-xl text-[#9CFF4A] tracking-widest mb-2 font-medium">
-              MY FOCUS IS
-            </p>
+            <div className="flex flex-wrap items-center gap-3 mb-2">
+              <p className="font-mono text-sm sm:text-xl text-[#9CFF4A] tracking-widest font-medium">
+                MY FOCUS IS
+              </p>
+              <span className="font-kanji text-[11px] sm:text-xs px-2 py-0.5 border border-[#9CFF4A]/30 text-[#9CFF4A] bg-[#9CFF4A]/5 tracking-wider">
+                【 低層工学・情報保安 】
+              </span>
+            </div>
 
             <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#D7D9D2] uppercase leading-[0.95] mb-2">
               LOW-LEVEL<br />
@@ -98,10 +126,15 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
                 SECURITY.
               </span>
 
-              {/* [ K01 ] Badge */}
-              <span className="inline-block font-mono text-xs sm:text-sm px-3 py-1 border border-[#9CFF4A] text-[#9CFF4A] bg-[#9CFF4A]/10 align-middle ml-auto sm:ml-4 tracking-widest">
-                [ K01 ]
-              </span>
+              {/* [ K01 ] and Kanji Badges */}
+              <div className="flex items-center space-x-2 ml-auto sm:ml-4">
+                <span className="font-kanji text-xs px-2.5 py-1 border border-[#9CFF4A]/40 text-[#9CFF4A] bg-[#9CFF4A]/10 tracking-widest">
+                  零依存
+                </span>
+                <span className="font-mono text-xs sm:text-sm px-3 py-1 border border-[#9CFF4A] text-[#9CFF4A] bg-[#9CFF4A]/10 tracking-widest">
+                  [ K01 ]
+                </span>
+              </div>
             </div>
           </motion.div>
 
@@ -147,6 +180,9 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
             className="group flex items-center space-x-2 px-5 py-2.5 bg-[#9CFF4A] text-[#050605] font-bold tracking-wider hover:bg-[#D7D9D2] transition-colors cursor-pointer"
           >
             <span>INSPECT_PROJECTS</span>
+            <span className="font-kanji text-[11px] font-bold opacity-85">
+              【 開発目録 】
+            </span>
             <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
           </button>
 

@@ -80,6 +80,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <span className="text-[#9CFF4A] font-bold text-sm">04 / 06</span>
           <span className="text-[#9CFF4A]/40">/</span>
           <span className="text-[#9CFF4A] tracking-wider uppercase">SECURE DIRECT CHANNEL</span>
+          <span className="font-kanji text-[11px] text-[#9CFF4A]/70 hidden md:inline tracking-wider">
+            【 通信路 // 暗号化伝送 】
+          </span>
         </div>
         <div className="hidden sm:block text-[#D7D9D2]/50 tracking-wider">
           GPG / EMAIL / GITHUB TRANSMISSION
@@ -98,11 +101,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div
             onMouseEnter={(e) => handleMouseEnter(e, 'contact-card')}
             onMouseLeave={handleMouseLeave}
-            className="p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono space-y-6 hover:border-[#9CFF4A]/40 transition-colors"
+            className="relative p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono space-y-6 hover:border-[#9CFF4A]/40 transition-colors overflow-hidden"
           >
+            {/* Background Kanji Watermark */}
+            <div
+              className="absolute right-4 bottom-2 font-kanji font-black text-8xl text-[#9CFF4A]/[0.03] select-none pointer-events-none"
+              aria-hidden="true"
+            >
+              通信
+            </div>
+
             <div>
-              <div className="text-xs text-[#9CFF4A] font-bold tracking-widest uppercase mb-1">
-                // DIRECT_COMMUNICATION
+              <div className="text-xs text-[#9CFF4A] font-bold tracking-widest uppercase mb-1 flex items-center space-x-2">
+                <span>// DIRECT_COMMUNICATION</span>
+                <span className="font-kanji text-[11px] text-[#9CFF4A]/80 font-normal">
+                  【 直接通信 】
+                </span>
               </div>
               <h2 className="font-display font-black text-3xl sm:text-4xl text-[#D7D9D2] tracking-tight uppercase">
                 INITIATE CONTACT.
@@ -173,9 +187,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             onMouseLeave={handleMouseLeave}
             className="p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono text-xs space-y-4 hover:border-[#9CFF4A]/40 transition-colors"
           >
-            <div className="text-xs text-[#9CFF4A] font-bold tracking-widest uppercase mb-2 flex items-center space-x-2">
-              <Send className="w-3.5 h-3.5" />
-              <span>DISPATCH_MESSAGE</span>
+            <div className="text-xs text-[#9CFF4A] font-bold tracking-widest uppercase mb-2 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Send className="w-3.5 h-3.5" />
+                <span>DISPATCH_MESSAGE</span>
+              </div>
+              <span className="font-kanji text-[10px] text-[#9CFF4A]/70 font-normal">
+                【 通信送信機 】
+              </span>
             </div>
 
             <div className="space-y-1.5">
