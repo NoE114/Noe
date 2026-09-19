@@ -29,7 +29,7 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
       <section
         ref={ref}
         id="hero"
-        className="relative min-h-screen pt-28 pb-20 px-6 sm:px-12 lg:px-20 flex flex-col justify-between overflow-hidden"
+        className="relative min-h-screen pt-[clamp(5.5rem,9vw,8rem)] pb-[clamp(5rem,9vw,8rem)] px-[clamp(1.25rem,4vw,5rem)] flex flex-col justify-between overflow-hidden"
       >
       {/* Top Asymmetric Index & Epigraph */}
       <motion.div
@@ -68,13 +68,13 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
 
       {/* Aesthetic Vertical Japanese Kanji Watermark Column */}
       <div className="absolute right-4 sm:right-10 top-1/4 -translate-y-12 pointer-events-none select-none z-0 hidden md:flex flex-col items-center opacity-[0.035] hover:opacity-[0.08] transition-opacity duration-700">
-        <span className="font-kanji text-8xl lg:text-9xl font-black text-[#9CFF4A] writing-vertical-rl tracking-[0.2em]">
+        <span className="font-kanji fluid-kanji font-black text-[#9CFF4A] writing-vertical-rl tracking-[0.2em]">
           深層工学
         </span>
       </div>
 
       <div className="absolute left-3 bottom-24 pointer-events-none select-none z-0 hidden xl:flex flex-col items-center opacity-[0.03]">
-        <span className="font-kanji text-7xl font-black text-[#D7D9D2] writing-vertical-rl tracking-[0.25em]">
+        <span className="font-kanji fluid-kanji-sm font-black text-[#D7D9D2] writing-vertical-rl tracking-[0.25em]">
           零外部依存
         </span>
       </div>
@@ -113,16 +113,16 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
               </span>
             </div>
 
-            <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#D7D9D2] uppercase leading-[0.95] mb-2">
+            <h1 className="font-display font-black fluid-display tracking-tight text-[#D7D9D2] uppercase mb-2">
               LOW-LEVEL<br />
               SYSTEMS
             </h1>
 
             <div className="flex flex-wrap items-baseline gap-4 sm:gap-6 mt-2">
-              <span className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#9CFF4A]">
+              <span className="font-display font-black fluid-display tracking-tight text-[#9CFF4A]">
                 &amp;
               </span>
-              <span className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#D7D9D2] uppercase">
+              <span className="font-display font-black fluid-display tracking-tight text-[#D7D9D2] uppercase">
                 SECURITY.
               </span>
 

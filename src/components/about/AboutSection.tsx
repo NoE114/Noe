@@ -45,7 +45,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
         if (entranceTrigger) setAnimationDone(true);
       }}
       style={animationDone ? { transform: 'none' } : undefined}
-      className="relative z-20 py-24 px-6 sm:px-12 lg:px-20 border-t border-[#9CFF4A]/10"
+      className="relative z-20 section-pad border-t border-[#9CFF4A]/10"
     >
       {/* Section Header */}
       <motion.div
@@ -81,7 +81,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           <div
             onMouseEnter={(e) => handleMouseEnter(e, 'developer-bio')}
             onMouseLeave={handleMouseLeave}
-            className="p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 space-y-4 font-mono hover:border-[#9CFF4A]/40 transition-colors"
+            className="card-pad-lg border border-[#9CFF4A]/20 bg-[#050605]/80 space-y-4 font-mono hover:border-[#9CFF4A]/40 transition-colors"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">

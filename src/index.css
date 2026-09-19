@@ -35,6 +35,59 @@
   font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
 }
 
+/* ---------------------------------------------------------------------------
+ * Fluid / viewport-adaptive scale.
+ * Browser zoom changes the CSS-px viewport width, which used to snap sizes
+ * between breakpoints (sm/md/lg) and left dead space. These clamp() helpers
+ * scale continuously with the viewport so the layout stays proportional at
+ * every zoom level instead of growing/shrinking in steps.
+ * ------------------------------------------------------------------------- */
+@layer utilities {
+  /* Flagship display headline (hero: LOW-LEVEL SYSTEMS / SECURITY.) */
+  .fluid-display {
+    font-size: clamp(2.5rem, 5vw + 0.75rem, 7.75rem);
+    line-height: 0.95;
+  }
+
+  /* Split project titles (text-4xl -> text-7xl stepped range) */
+  .fluid-split {
+    font-size: clamp(1.9rem, 3.6vw + 0.75rem, 6rem);
+  }
+
+  /* Oversized kanji/watermark glyphs (text-8xl / text-9xl) */
+  .fluid-kanji {
+    font-size: clamp(4rem, 8vw + 1rem, 10.5rem);
+  }
+
+  .fluid-kanji-sm {
+    font-size: clamp(3rem, 5.5vw + 0.75rem, 6.5rem);
+  }
+
+  /* Section-level headings (text-3xl -> text-4xl stepped range) */
+  .fluid-heading {
+    font-size: clamp(1.8rem, 2.6vw + 0.9rem, 3.5rem);
+  }
+
+  /* Section vertical+horizontal rhythm (py-24 px-6 sm:px-12 lg:px-20) */
+  .section-pad {
+    padding: clamp(4rem, 7vw, 8.5rem) clamp(1.25rem, 4vw, 5rem);
+  }
+
+  /* Card gutters that currently use fixed p-8 / p-6 sm:p-10 */
+  .card-pad {
+    padding: clamp(1.25rem, 2.4vw, 2.5rem);
+  }
+
+  .card-pad-lg {
+    padding: clamp(1.5rem, 3.2vw, 3rem);
+  }
+}
+
+/* Technical grid cell: scales with the viewport instead of a fixed 120px */
+:root {
+  --tech-cell: clamp(70px, 9vw, 170px);
+}
+
 .writing-vertical-rl {
   writing-mode: vertical-rl;
   text-orientation: upright;

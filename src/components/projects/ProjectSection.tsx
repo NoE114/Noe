@@ -57,7 +57,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
         if (entranceTrigger) setAnimationDone(true);
       }}
       style={animationDone ? { transform: 'none' } : undefined}
-      className="relative z-20 py-24 px-6 sm:px-12 lg:px-20"
+      className="relative z-20 section-pad"
     >
       {/* Section Header */}
       <motion.div
@@ -197,11 +197,11 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="relative border border-[#9CFF4A]/20 bg-[#050605]/90 p-6 sm:p-10 overflow-hidden"
+                className="relative border border-[#9CFF4A]/20 bg-[#050605]/90 card-pad-lg overflow-hidden"
               >
                 {/* Background watermarked project index & Japanese Kanji */}
                 <div
-                  className="absolute -right-6 -bottom-10 font-display font-black text-8xl sm:text-9xl text-[#9CFF4A]/5 select-none pointer-events-none"
+                  className="absolute -right-6 -bottom-10 font-display font-black fluid-kanji text-[#9CFF4A]/5 select-none pointer-events-none"
                   aria-hidden="true"
                 >
                   {activeProject.index}
@@ -209,7 +209,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
 
                 {activeProject.kanjiWatermark && (
                   <div
-                    className="absolute right-12 top-2 font-kanji font-black text-7xl sm:text-8xl md:text-9xl text-[#9CFF4A]/[0.035] select-none pointer-events-none"
+                    className="absolute right-12 top-2 font-kanji font-black fluid-kanji text-[#9CFF4A]/[0.035] select-none pointer-events-none"
                     aria-hidden="true"
                   >
                     {activeProject.kanjiWatermark}
@@ -230,7 +230,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
                 <div className="project-title-container my-6 relative py-4">
                   {/* Shadow layer */}
                   <div
-                    className="absolute inset-0 font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tighter text-[#4D7F2C]/20 -translate-x-2 -translate-y-2 pointer-events-none select-none"
+                    className="absolute inset-0 font-display font-black fluid-split uppercase tracking-tighter text-[#4D7F2C]/20 -translate-x-2 -translate-y-2 pointer-events-none select-none"
                     aria-hidden="true"
                   >
                     {activeProject.splitFirst} {activeProject.splitSecond}
@@ -238,14 +238,14 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
 
                   {/* Primary Split Title */}
                   <div className="relative z-10 flex flex-wrap items-baseline gap-x-4 sm:gap-x-6">
-                    <span className="font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tighter text-[#D7D9D2] hover:text-[#9CFF4A] transition-colors">
+                    <span className="font-display font-black fluid-split uppercase tracking-tighter text-[#D7D9D2] hover:text-[#9CFF4A] transition-colors">
                       {activeProject.splitFirst}
                     </span>
 
                     {/* Expanding visual accent bar between the two split halves */}
                     <span className="h-1 sm:h-2 bg-[#9CFF4A] flex-grow min-w-[30px] max-w-[120px] self-center animate-pulse" />
 
-                    <span className="font-display font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tighter text-[#9CFF4A]">
+                    <span className="font-display font-black fluid-split uppercase tracking-tighter text-[#9CFF4A]">
                       {activeProject.splitSecond}
                     </span>
                   </div>

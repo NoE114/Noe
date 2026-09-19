@@ -103,7 +103,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         if (entranceTrigger) setAnimationDone(true);
       }}
       style={animationDone ? { transform: 'none' } : undefined}
-      className="relative z-20 py-24 px-6 sm:px-12 lg:px-20 border-t border-[#9CFF4A]/10 pb-36"
+      className="relative z-20 section-pad border-t border-[#9CFF4A]/10 pb-[clamp(7rem,13vw,11rem)]"
     >
       {/* Section Header */}
       <motion.div
@@ -138,11 +138,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           <div
             onMouseEnter={(e) => handleMouseEnter(e, 'contact-card')}
             onMouseLeave={handleMouseLeave}
-            className="relative p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono space-y-6 hover:border-[#9CFF4A]/40 transition-colors overflow-hidden"
+            className="relative card-pad-lg border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono space-y-6 hover:border-[#9CFF4A]/40 transition-colors overflow-hidden"
           >
             {/* Background Kanji Watermark */}
             <div
-              className="absolute right-4 bottom-2 font-kanji font-black text-8xl text-[#9CFF4A]/[0.03] select-none pointer-events-none"
+              className="absolute right-4 bottom-2 font-kanji font-black fluid-kanji text-[#9CFF4A]/[0.03] select-none pointer-events-none"
               aria-hidden="true"
             >
               通信
@@ -155,7 +155,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   【 直接通信 】
                 </span>
               </div>
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-[#D7D9D2] tracking-tight uppercase">
+              <h2 className="font-display font-black fluid-heading text-[#D7D9D2] tracking-tight uppercase">
                 INITIATE CONTACT.
               </h2>
               <p className="text-xs text-[#D7D9D2]/70 mt-2 leading-relaxed">
@@ -226,7 +226,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             onSubmit={handleSubmit}
             onMouseEnter={(e) => handleMouseEnter(e, 'contact-form')}
             onMouseLeave={handleMouseLeave}
-            className="p-8 border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono text-xs space-y-4 hover:border-[#9CFF4A]/40 transition-colors"
+            className="card-pad-lg border border-[#9CFF4A]/20 bg-[#050605]/80 font-mono text-xs space-y-4 hover:border-[#9CFF4A]/40 transition-colors"
           >
             {/* Netlify Form Hidden Inputs */}
             <input type="hidden" name="form-name" value="contact" />
