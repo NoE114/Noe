@@ -50,7 +50,7 @@ export const MobPsychoText: React.FC<MobPsychoTextProps> = ({
     >
       <svg
         viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-        className="w-full h-auto max-w-[95vw] sm:max-w-[90vw] md:max-w-[85vw] lg:max-w-[80vw] max-h-[46vh] sm:max-h-[56vh] md:max-h-[64vh] overflow-visible drop-shadow-none transition-all duration-75"
+        className="w-full h-auto max-w-4xl max-h-[50vh] overflow-visible drop-shadow-none transition-all duration-75"
         preserveAspectRatio="xMidYMid meet"
       >
         <g transform={`skewX(-6) translate(${padX}, 6)`}>

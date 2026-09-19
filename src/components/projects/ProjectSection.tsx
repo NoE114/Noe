@@ -59,14 +59,15 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
       style={animationDone ? { transform: 'none' } : undefined}
       className="relative z-20 section-pad"
     >
-      {/* Section Header */}
-      <motion.div
-        initial={{ opacity: 0, y: -16 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="flex items-center justify-between border-b border-[#9CFF4A]/20 pb-4 mb-12 font-mono text-xs text-[#D7D9D2]/70"
-      >
+      <div className="w-full max-w-7xl xl:max-w-[85rem] 2xl:max-w-[100rem] mx-auto">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="flex items-center justify-between border-b border-[#9CFF4A]/20 pb-4 mb-12 font-mono text-xs text-[#D7D9D2]/70"
+        >
         <div className="flex items-center space-x-3">
           <span className="text-[#9CFF4A] font-bold text-sm">02 / 06</span>
           <span className="text-[#9CFF4A]/40">/</span>
@@ -443,6 +444,7 @@ export const ProjectSection: React.FC<ProjectSectionProps> = ({
             </motion.div>
           </AnimatePresence>
         </div>
+      </div>
       </div>
     </motion.section>
   );
