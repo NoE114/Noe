@@ -36,21 +36,23 @@ export class LoaderAudioEngine {
     }
 
     try {
-      const AudioCtxClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+      const AudioCtxClass =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (!AudioCtxClass) return false;
 
       if (!this.ctx) {
         this.ctx = new AudioCtxClass();
+        this.setupNodes();
+        this.isRunning = true;
+        this.triggerCue('HUM_INIT', { freq: 46, gain: 0.04 });
       }
 
       if (this.ctx.state === 'suspended') {
-        await this.ctx.resume();
+        await this.ctx.resume().catch(() => {});
       }
 
-      this.setupNodes();
-      this.isRunning = true;
-      this.triggerCue('HUM_INIT', { freq: 46, gain: 0.04 });
-      return true;
+      return this.ctx.state === 'running';
     } catch {
       // Audio context might be blocked by browser autoplay policy until user interacts
       return false;

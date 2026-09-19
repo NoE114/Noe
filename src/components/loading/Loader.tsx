@@ -14,7 +14,6 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete, onSyncPhase, onAudio
   const [displayValue, setDisplayValue] = useState<string>('00');
   const [phase, setPhase] = useState<'counting' | 'surge' | 'mystery' | 'blackout' | 'finished'>('counting');
   const [statusLog, setStatusLog] = useState<string>('MOB_PSYCHE // SUPPRESSED EMOTIONAL BURDEN');
-  const [audioActive, setAudioActive] = useState<boolean>(false);
   const [audioMuted, setAudioMuted] = useState<boolean>(false);
 
   const startTimeRef = useRef<number | null>(null);
@@ -40,7 +39,7 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete, onSyncPhase, onAudio
   };
 
   useEffect(() => {
-    // Initialize ambient hum audio trigger engine
+    // Initialize ambient hum audio trigger engine with sound enabled by default
     const engine = new LoaderAudioEngine({
       onTriggerCue: (cue) => {
         onAudioCueRef.current?.(cue);
@@ -48,19 +47,19 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete, onSyncPhase, onAudio
     });
     audioEngineRef.current = engine;
 
-    // Attempt audio init
-    engine.init().then((success) => {
-      if (success) setAudioActive(true);
-    });
+    // Start audio context immediately
+    engine.init();
 
+    // Auto-resume on first user gesture if browser requires interaction
     const unlockAudio = () => {
       if (audioEngineRef.current) {
-        audioEngineRef.current.init().then((success) => {
-          if (success) setAudioActive(true);
-        });
+        audioEngineRef.current.init();
       }
     };
     window.addEventListener('pointerdown', unlockAudio, { once: true });
+    window.addEventListener('keydown', unlockAudio, { once: true });
+    window.addEventListener('touchstart', unlockAudio, { once: true });
+    window.addEventListener('click', unlockAudio, { once: true });
 
     // Allow user to press ESC or Enter to instantly enter the site
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -144,6 +143,9 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete, onSyncPhase, onAudio
 
     return () => {
       window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+      window.removeEventListener('click', unlockAudio);
       window.removeEventListener('keydown', handleKeyDown);
       if (animFrameRef.current) {
         cancelAnimationFrame(animFrameRef.current);
@@ -158,17 +160,10 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete, onSyncPhase, onAudio
     e.stopPropagation();
     if (!audioEngineRef.current) return;
 
-    if (!audioActive) {
-      audioEngineRef.current.init().then((success) => {
-        if (success) {
-          setAudioActive(true);
-          setAudioMuted(false);
-        }
-      });
-    } else {
-      const isMuted = audioEngineRef.current.toggleMute();
+    audioEngineRef.current.init().then(() => {
+      const isMuted = audioEngineRef.current?.toggleMute() ?? false;
       setAudioMuted(isMuted);
-    }
+    });
   };
 
   if (phase === 'finished') return null;
@@ -202,17 +197,13 @@ export const Loader: React.FC<LoaderProps> = ({ onComplete, onSyncPhase, onAudio
               className="flex items-center space-x-1.5 px-2 py-1 border border-white/20 hover:border-white text-[10px] font-mono tracking-wider transition-colors cursor-pointer text-white/80 hover:text-white"
               title="Toggle ambient psyche audio hum"
             >
-              {audioActive && !audioMuted ? (
+              {!audioMuted ? (
                 <Volume2 className="w-3 h-3 text-[#9CFF4A] animate-pulse" />
               ) : (
                 <VolumeX className="w-3 h-3 text-white/40" />
               )}
               <span>
-                {!audioActive
-                  ? 'ENABLE AUDIO'
-                  : audioMuted
-                  ? 'MUTED'
-                  : 'HUM: ACTIVE'}
+                {audioMuted ? 'SOUND: OFF' : 'SOUND: ON'}
               </span>
             </button>
 
